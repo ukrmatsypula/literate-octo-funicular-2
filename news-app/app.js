@@ -62,9 +62,9 @@ const newsService = (function () {
   const apiUrl = "https://newsapi.org/v2";
 
   return {
-    topHeadlines(country = "ua", cb) {
+    topHeadlines(country = "ua", cb, category = "technology") {
       http.get(
-        `${apiUrl}/top-headlines?country=${country}&category=technology&apiKey=${apiKey}`,
+        `${apiUrl}/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`,
         cb
       );
     },
@@ -78,6 +78,7 @@ const newsService = (function () {
 const form = document.forms["newsControls"];
 const countrySelect = form.elements["country"];
 const searchInput = form.elements["search"];
+const categoryInput = form.elements["category"];
 
 //  Events
 document.addEventListener("DOMContentLoaded", function () {
@@ -95,9 +96,10 @@ function loadNews() {
   showLoader();
   const country = countrySelect.value;
   const searchText = searchInput.value;
+  const category = categoryInput.value;
 
   if (!searchText) {
-    newsService.topHeadlines(country, onGetResponse);
+    newsService.topHeadlines(country, onGetResponse, category);
   } else {
     newsService.everything(searchText, onGetResponse);
   }
