@@ -64,7 +64,7 @@ const newsService = (function () {
   return {
     topHeadlines(country = "ua", cb) {
       http.get(
-        `${apiUrl}/top-headlines?country=${country}&apiKey=${apiKey}`,
+        `${apiUrl}/top-headlines?country=${country}&category=technology&apiKey=${apiKey}`,
         cb
       );
     },
@@ -91,10 +91,14 @@ function onGetResponse(err, response) {
 
 function renderNews(news) {
   const newsContainer = document.querySelector(".news-container .row");
+  let fragment = "";
 
   news.forEach((newsItem) => {
     const el = newsTemplate(newsItem);
+    fragment += el;
   });
+
+  newsContainer.insertAdjacentHTML('afterbegin', fragment)
 }
 
 function newsTemplate({ title, url, description, urlToImage }) {
