@@ -74,14 +74,32 @@ const newsService = (function () {
   };
 })();
 
-//  init selects
+//Elements UI
+const form = document.forms["newsControls"];
+const countrySelect = form.elements["country"];
+const searchInput = form.elements["search"];
+
+//  Events
 document.addEventListener("DOMContentLoaded", function () {
   M.AutoInit();
   loadNews();
 });
 
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  loadNews();
+});
+
 function loadNews() {
-  newsService.topHeadlines("ua", onGetResponse);
+  const country = countrySelect.value;
+  const searchText = searchInput.value;
+
+  if (!searchText) {
+    newsService.topHeadlines(country, onGetResponse);
+  } else {
+    newsService.everything(searchText, onGetResponse);
+  }
 }
 
 // get respnse from server
@@ -98,7 +116,7 @@ function renderNews(news) {
     fragment += el;
   });
 
-  newsContainer.insertAdjacentHTML('afterbegin', fragment)
+  newsContainer.insertAdjacentHTML("afterbegin", fragment);
 }
 
 function newsTemplate({ title, url, description, urlToImage }) {
@@ -106,7 +124,7 @@ function newsTemplate({ title, url, description, urlToImage }) {
   <div class="col s12">
     <div class="card">
       <div class="card-image">
-        <img src="${urlToImage || "placehold.it/200"}">
+        <img src="${urlToImage || "http://www.placehold.it/350x220"}">
         <span class="card-title">${title || ""}</span>
       </div>
       <div class="card-content">
