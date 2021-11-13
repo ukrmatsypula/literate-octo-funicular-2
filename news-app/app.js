@@ -86,5 +86,32 @@ function loadNews() {
 
 // get respnse from server
 function onGetResponse(err, response) {
-  console.log(response);
+  renderNews(response.articles);
+}
+
+function renderNews(news) {
+  const newsContainer = document.querySelector(".news-container .row");
+
+  news.forEach((newsItem) => {
+    const el = newsTemplate(newsItem);
+  });
+}
+
+function newsTemplate({ title, url, description, urlToImage }) {
+  return `
+  <div class="col s12">
+    <div class="card">
+      <div class="card-image">
+        <img src="${urlToImage || "placehold.it/200"}">
+        <span class="card-title">${title || ""}</span>
+      </div>
+      <div class="card-content">
+        <p>${description || ""}</p>
+      </div>
+      <div class="card-action">
+        <a href="${url}">Read more</a>
+      </div>
+    </div>
+  </div>
+  `;
 }
