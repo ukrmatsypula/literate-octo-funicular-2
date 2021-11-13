@@ -118,6 +118,10 @@ function onGetResponse(err, response) {
 
 function renderNews(news) {
   const newsContainer = document.querySelector(".news-container .row");
+
+  if (newsContainer.children.length) {
+    clearContainer(newsContainer);
+  }
   let fragment = "";
 
   news.forEach((newsItem) => {
@@ -145,6 +149,15 @@ function newsTemplate({ title, url, description, urlToImage }) {
     </div>
   </div>
   `;
+}
+
+function clearContainer(container) {
+  // newsContainer.innerHTML = '';
+  let child = container.lastElementChild;
+  while (child) {
+    container.removeChild(child);
+    child = container.lastElementChild;
+  }
 }
 
 function showAlert(msg, type = "success") {
