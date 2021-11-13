@@ -41,6 +41,7 @@ function customHttp() {
         });
 
         if (headers) {
+          console.log("headers");
           Object.entries(headers).forEach(([key, value]) => {
             xhr.setRequestHeader(key, value);
           });
