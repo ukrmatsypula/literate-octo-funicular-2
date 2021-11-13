@@ -57,7 +57,34 @@ function customHttp() {
 // Init http module
 const http = customHttp();
 
+const newsService = (function () {
+  const apiKey = "5feac4f176674010acfc293ce5ee2c46";
+  const apiUrl = "https://newsapi.org/v2";
+
+  return {
+    topHeadlines(country = "ua", cb) {
+      http.get(
+        `${apiUrl}/top-headlines?country=${country}&apiKey=${apiKey}`,
+        cb
+      );
+    },
+    everything(query, cb) {
+      http.get(`${apiUrl}/everything?q=${query}&apiKey=${apiKey}`, cb);
+    },
+  };
+})();
+
 //  init selects
 document.addEventListener("DOMContentLoaded", function () {
   M.AutoInit();
+  loadNews();
 });
+
+function loadNews() {
+  newsService.topHeadlines("ua", onGetResponse);
+}
+
+// get respnse from server
+function onGetResponse(err, response) {
+  console.log(response);
+}
