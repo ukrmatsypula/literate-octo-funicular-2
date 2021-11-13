@@ -4,8 +4,8 @@ function customHttp() {
     get(url, cb) {
       try {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.addEventListener('load', () => {
+        xhr.open("GET", url);
+        xhr.addEventListener("load", () => {
           if (Math.floor(xhr.status / 100) !== 2) {
             cb(`Error. Status code: ${xhr.status}`, xhr);
             return;
@@ -14,7 +14,7 @@ function customHttp() {
           cb(null, response);
         });
 
-        xhr.addEventListener('error', () => {
+        xhr.addEventListener("error", () => {
           cb(`Error. Status code: ${xhr.status}`, xhr);
         });
 
@@ -26,8 +26,8 @@ function customHttp() {
     post(url, body, headers, cb) {
       try {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', url);
-        xhr.addEventListener('load', () => {
+        xhr.open("POST", url);
+        xhr.addEventListener("load", () => {
           if (Math.floor(xhr.status / 100) !== 2) {
             cb(`Error. Status code: ${xhr.status}`, xhr);
             return;
@@ -36,7 +36,7 @@ function customHttp() {
           cb(null, response);
         });
 
-        xhr.addEventListener('error', () => {
+        xhr.addEventListener("error", () => {
           cb(`Error. Status code: ${xhr.status}`, xhr);
         });
 
@@ -57,6 +57,6 @@ function customHttp() {
 const http = customHttp();
 
 //  init selects
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   M.AutoInit();
 });
