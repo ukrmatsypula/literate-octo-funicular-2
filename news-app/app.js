@@ -104,6 +104,15 @@ function loadNews() {
 
 // get respnse from server
 function onGetResponse(err, response) {
+  if (err) {
+    showAlert(err, "error-msg");
+    return;
+  }
+
+  if (!response.articles.length) {
+    showAlert("По вашему запросу ничего не найдено");
+    return;
+  }
   renderNews(response.articles);
 }
 
@@ -136,4 +145,8 @@ function newsTemplate({ title, url, description, urlToImage }) {
     </div>
   </div>
   `;
+}
+
+function showAlert(msg, type = "success") {
+  M.toast({ html: msg, classes: type });
 }
