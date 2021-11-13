@@ -92,6 +92,7 @@ form.addEventListener("submit", (e) => {
 });
 
 function loadNews() {
+  showLoader();
   const country = countrySelect.value;
   const searchText = searchInput.value;
 
@@ -104,6 +105,8 @@ function loadNews() {
 
 // get respnse from server
 function onGetResponse(err, response) {
+  removePreloader();
+
   if (err) {
     showAlert(err, "error-msg");
     return;
@@ -162,4 +165,21 @@ function clearContainer(container) {
 
 function showAlert(msg, type = "success") {
   M.toast({ html: msg, classes: type });
+}
+
+// shoe loader
+function showLoader() {
+  document.body.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="progress">
+      <div class="indeterminate"></div>
+    </div>`
+  );
+}
+
+function removePreloader() {
+  const loader = document.querySelector(".progress");
+  if (loader) {
+    loader.remove();
+  }
 }
