@@ -1,3 +1,37 @@
+// const promise = new Promise((resolve, reject) => {
+//   setTimeout(() => resolve(Math.random()), 5000);
+// });
+
+// console.log(promise);
+// promise
+//   .then((result) => {
+//     console.log(result);
+//     return 3721;
+//   })
+//   .then((y) => {
+//     console.log(y);
+//     return 3722;
+//   })
+//   .then((z) => console.log(z));
+
+// function promiseCreator(time, value) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => resolve(value), time)
+//   })
+// }
+
+// promiseCreator(3000, 'Ok!')
+//   .then(result => console.log(result))
+
+const url = "https://jsonplaceholder.typicode.com/posts";
+
+fetch(url)
+  .then((response) => {
+    console.log(response);
+    return response.json();
+  })
+  .then(posts => console.log(posts))
+  .catch((err) => console.log(err));
 const btnGetPosts = document.querySelector(".btn-get-posts");
 const btnCreatePost = document.querySelector(".btn-create-post");
 
@@ -260,7 +294,7 @@ function http() {
 
         if (headers) {
           Object.entries(headers).forEach(([key, value]) => {
-            xhr.setRequestHeader(key, value)
+            xhr.setRequestHeader(key, value);
           });
         }
 
