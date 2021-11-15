@@ -87,4 +87,30 @@ class Product {
 const newProcuct = new Product("apple", 1000, 10);
 const newProcuct2 = new Product("samsung", 2000, 15);
 
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+class Customer extends User {
+  constructor(firstName, lastName, membership) {
+    super(firstName, lastName);
+    this.membership = membership;
+  }
+
+  getFullName() {
+    const parentResult = super.getFullName();
+
+    console.log(parentResult, "membership: " + this.membership);
+  }
+}
+
+const customer = new Customer("Roman", "Matsypula", "advenced");
+
+console.log(customer);
