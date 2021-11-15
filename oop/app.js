@@ -66,5 +66,25 @@
 
 // ES6
 class Product {
+  constructor(brand, price, discount) {
+    this.brand = brand;
+    this.price = price;
+    this.discount = discount;
+  }
+  getPriceWithDiscount = function () {
+    return this.price - (this.price * this.discount) / 100;
+  };
 
+  setPrice = function (newPrice) {
+    this.price = newPrice;
+  };
+
+  static plus(x, y) {
+    return x + y;
+  }
 }
+
+const newProcuct = new Product("apple", 1000, 10);
+const newProcuct2 = new Product("samsung", 2000, 15);
+
+
