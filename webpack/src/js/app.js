@@ -9,4 +9,4 @@ import Product from "./module2";
 
 const product = new Product("Yellow");
 
-console.log(product);
+console.log(product)
